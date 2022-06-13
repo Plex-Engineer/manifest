@@ -2,11 +2,11 @@
 parent:
   order: false
 -->
-# Manifest
+# canto
 ## Description
-- Manifest is a Layer 1 blockchain built using Cosmos SDK and Tendermint Consensus with an EVM execution layer ([Ethermint](https://github.com/tharsis/ethermint) Module) and network owned/incentivized defi primitives(stablecoin, dex, lending market).
-- Manifest's blockchain infrastructure is forked from [Evmos](https://github.com/tharsis/evmos) (Standard Cosmos SDK modules + Ethermint Module + ERC20 Module). 
-- Manifest includes a new additional functionality in the form of a novel cross-runtime governance mechanism via the unigov (unified governance) module. The unigov module allows Manifest Network stakeholders to vote on proposals which are read and executed by smart contracts deployed on the EVM.
+- canto is a Layer 1 blockchain built using Cosmos SDK and Tendermint Consensus with an EVM execution layer ([Ethermint](https://github.com/tharsis/ethermint) Module) and network owned/incentivized defi primitives(stablecoin, dex, lending market).
+- canto's blockchain infrastructure is forked from [Evmos](https://github.com/tharsis/evmos) (Standard Cosmos SDK modules + Ethermint Module + ERC20 Module). 
+- canto includes a new additional functionality in the form of a novel cross-runtime governance mechanism via the unigov (unified governance) module. The unigov module allows canto Network stakeholders to vote on proposals which are read and executed by smart contracts deployed on the EVM.
 
 ## Running a Node
 1. Install [go](https://go.dev/doc/install)
@@ -23,6 +23,11 @@ You will see blocks printing if your node is successfully running.
 3. Proposal will pass. You can now query this proposal on the EVM. 
     - Address of proposal contract is `0x30E20d0A642ADB85Cb6E9da8fB9e3aadB0F593C0`
     - You can query any proposal at this contract using the QueryProp(propID) function
+
+## How it works
+- Proposals are added to the proposal store contract using the `AppendLendingMarketProposal` function in `x/unigov/keeper/proposals.go`
+- The proposal store contract (also called the map contrat) can be found in `contracts/Proposal-Store.sol`
+- The `QueryProp` method in the ProposalStore contract is used to query the proposal from the EVM using the proposal ID generated from the Cosmos SDK governance module. 
 
 
 Evmos readme below:
