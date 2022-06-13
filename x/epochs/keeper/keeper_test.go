@@ -19,8 +19,8 @@ import (
 
 	evm "github.com/tharsis/ethermint/x/evm/types"
 
-	"github.com/Canto-Network/canto/v4/app"
-	"github.com/Canto-Network/canto/v4/x/epochs/types"
+	"github.com/manifest-Network/manifest/v4/app"
+	"github.com/manifest-Network/manifest/v4/x/epochs/types"
 )
 
 var denomMint = evm.DefaultEVMDenom
@@ -29,7 +29,7 @@ type KeeperTestSuite struct {
 	suite.Suite
 
 	ctx            sdk.Context
-	app            *app.Canto
+	app            *app.manifest
 	queryClientEvm evm.QueryClient
 	queryClient    types.QueryClient
 	consAddress    sdk.ConsAddress

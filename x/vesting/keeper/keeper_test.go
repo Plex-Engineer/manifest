@@ -35,10 +35,10 @@ import (
 	ethermint "github.com/tharsis/ethermint/types"
 	evm "github.com/tharsis/ethermint/x/evm/types"
 
-	"github.com/Canto-Network/canto/v4/app"
-	"github.com/Canto-Network/canto/v4/contracts"
-	epochstypes "github.com/Canto-Network/canto/v4/x/epochs/types"
-	"github.com/Canto-Network/canto/v4/x/vesting/types"
+	"github.com/manifest-Network/manifest/v4/app"
+	"github.com/manifest-Network/manifest/v4/contracts"
+	epochstypes "github.com/manifest-Network/manifest/v4/x/epochs/types"
+	"github.com/manifest-Network/manifest/v4/x/vesting/types"
 )
 
 var (
@@ -71,7 +71,7 @@ type KeeperTestSuite struct {
 	suite.Suite
 
 	ctx              sdk.Context
-	app              *app.Canto
+	app              *app.manifest
 	queryClientEvm   evm.QueryClient
 	queryClient      types.QueryClient
 	address          common.Address
@@ -119,7 +119,7 @@ func (suite *KeeperTestSuite) DoSetupTest(t require.TestingT) {
 	// Set Context
 	suite.ctx = suite.app.BaseApp.NewContext(checkTx, tmproto.Header{
 		Height:          1,
-		ChainID:         "canto_9001-1",
+		ChainID:         "manifest_9001-1",
 		Time:            time.Now().UTC(),
 		ProposerAddress: suite.consAddress.Bytes(),
 

@@ -1,8 +1,8 @@
 package keeper
 
 import (
-	sdk "github.com/cosmos/cosmos-sdk/types"
 	"github.com/Canto-Network/canto/v4/x/epochs/types"
+	sdk "github.com/cosmos/cosmos-sdk/types"
 )
 
 var _ types.EpochHooks = MultiEpochHooks{}

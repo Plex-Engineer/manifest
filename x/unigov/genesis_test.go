@@ -2,10 +2,10 @@ package unigov_test
 
 import (
 	"testing"
-	//keepertest "github.com/Canto-Network/canto/v3/testutil/keeper"
-	//"github.com/Canto-Network/canto/v3/testutil/nullify"
-	// "github.com/Canto-Network/canto/v3/x/unigov"
-	// "github.com/Canto-Network/canto/v3/x/unigov/types"
+	//keepertest "github.com/manifest-Network/manifest/v3/testutil/keeper"
+	//"github.com/manifest-Network/manifest/v3/testutil/nullify"
+	// "github.com/manifest-Network/manifest/v3/x/unigov"
+	// "github.com/manifest-Network/manifest/v3/x/unigov/types"
 	// "github.com/stretchr/testify/require"
 )
 

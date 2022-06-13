@@ -17,10 +17,9 @@ import (
 
 	ibctesting "github.com/Canto-Network/canto/v4/ibc/testing"
 
-	minttypes "github.com/cosmos/cosmos-sdk/x/mint/types"
-	"github.com/Canto-Network/canto/v4/app"
 	inflationtypes "github.com/Canto-Network/canto/v4/x/inflation/types"
 	"github.com/Canto-Network/canto/v4/x/recovery/types"
+	minttypes "github.com/cosmos/cosmos-sdk/x/mint/types"
 )
 
 type IBCTestingSuite struct {
@@ -28,12 +27,12 @@ type IBCTestingSuite struct {
 	coordinator *ibcgotesting.Coordinator
 
 	// testing chains used for convenience and readability
-	CantoChain      *ibcgotesting.TestChain
+	cantoChain      *ibcgotesting.TestChain
 	IBCOsmosisChain *ibcgotesting.TestChain
 	IBCCosmosChain  *ibcgotesting.TestChain
 
-	pathOsmosisCanto  *ibcgotesting.Path
-	pathCosmosCanto   *ibcgotesting.Path
+	pathOsmosiscanto  *ibcgotesting.Path
+	pathCosmoscanto   *ibcgotesting.Path
 	pathOsmosisCosmos *ibcgotesting.Path
 }
 
@@ -51,19 +50,19 @@ func TestIBCTestingSuite(t *testing.T) {
 func (suite *IBCTestingSuite) SetupTest() {
 	// initializes 3 test chains
 	suite.coordinator = ibctesting.NewCoordinator(suite.T(), 1, 2)
-	suite.CantoChain = suite.coordinator.GetChain(ibcgotesting.GetChainID(1))
+	suite.cantoChain = suite.coordinator.GetChain(ibcgotesting.GetChainID(1))
 	suite.IBCOsmosisChain = suite.coordinator.GetChain(ibcgotesting.GetChainID(2))
 	suite.IBCCosmosChain = suite.coordinator.GetChain(ibcgotesting.GetChainID(3))
-	suite.coordinator.CommitNBlocks(suite.CantoChain, 2)
+	suite.coordinator.CommitNBlocks(suite.cantoChain, 2)
 	suite.coordinator.CommitNBlocks(suite.IBCOsmosisChain, 2)
 	suite.coordinator.CommitNBlocks(suite.IBCCosmosChain, 2)
 
 	// Mint coins locked on the canto account generated with secp.
-	coinCanto := sdk.NewCoin("acanto", sdk.NewInt(10000))
-	coins := sdk.NewCoins(coinCanto)
-	err := suite.CantoChain.App.(*app.Canto).BankKeeper.MintCoins(suite.CantoChain.GetContext(), inflationtypes.ModuleName, coins)
+	coincanto := sdk.NewCoin("acanto", sdk.NewInt(10000))
+	coins := sdk.NewCoins(coincanto)
+	err := suite.cantoChain.App.(*app.canto).BankKeeper.MintCoins(suite.cantoChain.GetContext(), inflationtypes.ModuleName, coins)
 	suite.Require().NoError(err)
-	err = suite.CantoChain.App.(*app.Canto).BankKeeper.SendCoinsFromModuleToAccount(suite.CantoChain.GetContext(), inflationtypes.ModuleName, suite.IBCOsmosisChain.SenderAccount.GetAddress(), coins)
+	err = suite.cantoChain.App.(*app.canto).BankKeeper.SendCoinsFromModuleToAccount(suite.cantoChain.GetContext(), inflationtypes.ModuleName, suite.IBCOsmosisChain.SenderAccount.GetAddress(), coins)
 	suite.Require().NoError(err)
 
 	// Mint coins on the osmosis side which we'll use to unlock our acanto
@@ -84,17 +83,17 @@ func (suite *IBCTestingSuite) SetupTest() {
 
 	params := types.DefaultParams()
 	params.EnableRecovery = true
-	suite.CantoChain.App.(*app.Canto).RecoveryKeeper.SetParams(suite.CantoChain.GetContext(), params)
+	suite.cantoChain.App.(*app.canto).RecoveryKeeper.SetParams(suite.cantoChain.GetContext(), params)
 
-	suite.pathOsmosisCanto = ibctesting.NewTransferPath(suite.IBCOsmosisChain, suite.CantoChain) // clientID, connectionID, channelID empty
-	suite.pathCosmosCanto = ibctesting.NewTransferPath(suite.IBCCosmosChain, suite.CantoChain)
+	suite.pathOsmosiscanto = ibctesting.NewTransferPath(suite.IBCOsmosisChain, suite.cantoChain) // clientID, connectionID, channelID empty
+	suite.pathCosmoscanto = ibctesting.NewTransferPath(suite.IBCCosmosChain, suite.cantoChain)
 	suite.pathOsmosisCosmos = ibctesting.NewTransferPath(suite.IBCCosmosChain, suite.IBCOsmosisChain)
-	suite.coordinator.Setup(suite.pathOsmosisCanto) // clientID, connectionID, channelID filled
-	suite.coordinator.Setup(suite.pathCosmosCanto)
+	suite.coordinator.Setup(suite.pathOsmosiscanto) // clientID, connectionID, channelID filled
+	suite.coordinator.Setup(suite.pathCosmoscanto)
 	suite.coordinator.Setup(suite.pathOsmosisCosmos)
-	suite.Require().Equal("07-tendermint-0", suite.pathOsmosisCanto.EndpointA.ClientID)
-	suite.Require().Equal("connection-0", suite.pathOsmosisCanto.EndpointA.ConnectionID)
-	suite.Require().Equal("channel-0", suite.pathOsmosisCanto.EndpointA.ChannelID)
+	suite.Require().Equal("07-tendermint-0", suite.pathOsmosiscanto.EndpointA.ClientID)
+	suite.Require().Equal("connection-0", suite.pathOsmosiscanto.EndpointA.ConnectionID)
+	suite.Require().Equal("channel-0", suite.pathOsmosiscanto.EndpointA.ChannelID)
 }
 
 var (

@@ -29,14 +29,14 @@ func GetTransferSenderRecipient(packet channeltypes.Packet) (
 
 	// validate the sender bech32 address from the counterparty chain
 	// and change the bech32 human readable prefix (HRP) of the sender to `canto`
-	sender, err = canto.GetCantoAddressFromBech32(data.Sender)
+	sender, err = canto.GetcantoAddressFromBech32(data.Sender)
 	if err != nil {
 		return nil, nil, "", "", sdkerrors.Wrap(err, "invalid sender")
 	}
 
 	// validate the recipient bech32 address from the counterparty chain
 	// and change the bech32 human readable prefix (HRP) of the recipient to `canto`
-	recipient, err = canto.GetCantoAddressFromBech32(data.Receiver)
+	recipient, err = canto.GetcantoAddressFromBech32(data.Receiver)
 	if err != nil {
 		return nil, nil, "", "", sdkerrors.Wrap(err, "invalid recipient")
 	}

@@ -27,7 +27,7 @@ const (
 const (
 	// DisplayDenom defines the denomination displayed to users in client applications.
 	DisplayDenom = "canto"
-	// BaseDenom defines to the default denomination used in Canto (staking, EVM, governance, etc.)
+	// BaseDenom defines to the default denomination used in canto (staking, EVM, governance, etc.)
 	BaseDenom = "acanto"
 )
 

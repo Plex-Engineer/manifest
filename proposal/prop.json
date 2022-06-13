@@ -1,5 +1,5 @@
 {
-    "description": "staking, gas and governance token of the Canto testnets",
+    "description": "staking, gas and governance token of the canto testnets",
     "denom_units": [
 	{
 	    "denom": "acanto",
@@ -13,7 +13,7 @@
 	],
     "base": "acanto",
     "display": "canto",
-    "name": "Canto",
-    "symbol": "CANTO"
+    "name": "canto",
+    "symbol": "canto"
 }
 

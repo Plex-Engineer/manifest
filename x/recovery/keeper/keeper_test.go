@@ -32,7 +32,7 @@ type KeeperTestSuite struct {
 
 	ctx sdk.Context
 
-	app         *app.Canto
+	app         *app.canto
 	queryClient types.QueryClient
 }
 

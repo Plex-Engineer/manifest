@@ -9,7 +9,7 @@ import (
 
 const (
 	ProposalTypeLendingMarket string = "Lending-Market"
-	ProposalTypeTreasury string  = "Treasury"
+	ProposalTypeTreasury      string = "Treasury"
 	MaxDescriptionLength      int    = 1000
 	MaxTitleLength            int    = 140
 )
@@ -22,7 +22,7 @@ var (
 //Register Compound Proposal type as a valid proposal type in goveranance module
 func init() {
 	govtypes.RegisterProposalType(ProposalTypeLendingMarket)
-	govtypes.RegisterProposalType(ProposalTypeTreasury) 
+	govtypes.RegisterProposalType(ProposalTypeTreasury)
 	govtypes.RegisterProposalTypeCodec(&LendingMarketProposal{}, "unigov/LendingMarketProposal")
 	govtypes.RegisterProposalTypeCodec(&TreasuryProposal{}, "unigov/TreasuryProposal")
 }
@@ -37,13 +37,13 @@ func NewLendingMarketProposal(title, description string, m *LendingMarketMetadat
 
 func NewTreasuryProposal(title, description string, tm *TreasuryProposalMetadata) govtypes.Content {
 	return &TreasuryProposal{
-		Title:        title,
-		Description:  description,
-		Metadata:     tm,
+		Title:       title,
+		Description: description,
+		Metadata:    tm,
 	}
 }
 
-func (*TreasuryProposal) ProposalRoute() string {return RouterKey}
+func (*TreasuryProposal) ProposalRoute() string { return RouterKey }
 
 func (*TreasuryProposal) ProposalType() string {
 	return ProposalTypeTreasury
@@ -61,7 +61,7 @@ func (lm *LendingMarketProposal) ValidateBasic() error {
 	}
 
 	m := lm.GetMetadata()
-	
+
 	cd, vals, sigs := len(m.GetCalldatas()), len(m.GetValues()), len(m.GetSignatures())
 
 	if cd != vals {
@@ -74,7 +74,6 @@ func (lm *LendingMarketProposal) ValidateBasic() error {
 	return nil
 }
 
-
 func (tp *TreasuryProposal) ValidateBasic() error {
 	if err := govtypes.ValidateAbstract(tp); err != nil {
 		return err
@@ -82,28 +81,28 @@ func (tp *TreasuryProposal) ValidateBasic() error {
 
 	tm := tp.GetMetadata()
 	s := strings.ToLower(tm.GetDenom())
-	
+
 	if s != "canto" && s != "note" {
 		return sdkerrors.Wrapf(govtypes.ErrInvalidProposalContent, "%s is not a valid denom string", tm.GetDenom())
 	}
-	
+
 	return nil
 }
 
 func (tp *TreasuryProposal) FromTreasuryToLendingMarket() *LendingMarketProposal {
 	m := tp.GetMetadata()
-	
+
 	lm := LendingMarketMetadata{
-		Account: []string{m.GetRecipient()},
-		PropId: m.GetPropID(), 
-		Values: []uint64{m.GetAmount()},
-		Calldatas: nil,
+		Account:    []string{m.GetRecipient()},
+		PropId:     m.GetPropID(),
+		Values:     []uint64{m.GetAmount()},
+		Calldatas:  nil,
 		Signatures: []string{m.GetDenom()},
 	}
-	
+
 	return &LendingMarketProposal{
-		Title: tp.GetTitle(),
+		Title:       tp.GetTitle(),
 		Description: tp.GetDescription(),
-		Metadata: &lm,
+		Metadata:    &lm,
 	}
 }

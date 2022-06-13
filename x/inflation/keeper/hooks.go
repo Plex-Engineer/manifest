@@ -3,9 +3,9 @@ package keeper
 import (
 	"fmt"
 
-	sdk "github.com/cosmos/cosmos-sdk/types"
 	epochstypes "github.com/Canto-Network/canto/v4/x/epochs/types"
 	"github.com/Canto-Network/canto/v4/x/inflation/types"
+	sdk "github.com/cosmos/cosmos-sdk/types"
 )
 
 // BeforeEpochStart: noop, We don't need to do anything here

@@ -6,9 +6,9 @@ import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	authtypes "github.com/cosmos/cosmos-sdk/x/auth/types"
 
+	"github.com/manifest-Network/manifest/v4/testutil"
+	"github.com/manifest-Network/manifest/v4/x/vesting/types"
 	"github.com/tharsis/ethermint/tests"
-	"github.com/Canto-Network/canto/v4/testutil"
-	"github.com/Canto-Network/canto/v4/x/vesting/types"
 )
 
 func (suite *KeeperTestSuite) TestBalances() {
@@ -34,7 +34,7 @@ func (suite *KeeperTestSuite) TestBalances() {
 			"invalid address",
 			func() {
 				req = &types.QueryBalancesRequest{
-					Address: "canto1",
+					Address: "manifest1",
 				}
 			},
 			false,

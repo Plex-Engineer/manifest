@@ -35,7 +35,7 @@ cantod config chain-id %CHAINID%
 
 cantod keys add %KEY% --keyring-backend %KEYRING% --algo %KEYALGO%
 
-rem Set moniker and chain-id for Canto (Moniker can be anything, chain-id must be an integer)
+rem Set moniker and chain-id for canto (Moniker can be anything, chain-id must be an integer)
 cantod init %MONIKER% --chain-id %CHAINID%
 
 rem Change parameter token denominations to acanto

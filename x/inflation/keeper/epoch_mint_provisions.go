@@ -3,8 +3,8 @@ package keeper
 import (
 	"fmt"
 
-	sdk "github.com/cosmos/cosmos-sdk/types"
 	"github.com/Canto-Network/canto/v4/x/inflation/types"
+	sdk "github.com/cosmos/cosmos-sdk/types"
 )
 
 // GetEpochMintProvision gets the current EpochMintProvision

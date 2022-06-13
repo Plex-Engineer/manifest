@@ -39,9 +39,9 @@ func TestEqualMetadata(t *testing.T) {
 			banktypes.Metadata{
 				Base:        "acanto",
 				Display:     "canto",
-				Name:        "Canto",
-				Symbol:      "CANTO",
-				Description: "EVM, staking and governance denom of Canto",
+				Name:        "canto",
+				Symbol:      "canto",
+				Description: "EVM, staking and governance denom of canto",
 				DenomUnits: []*banktypes.DenomUnit{
 					{
 						Denom:    "acanto",
@@ -57,9 +57,9 @@ func TestEqualMetadata(t *testing.T) {
 			banktypes.Metadata{
 				Base:        "acanto",
 				Display:     "canto",
-				Name:        "Canto",
-				Symbol:      "CANTO",
-				Description: "EVM, staking and governance denom of Canto",
+				Name:        "canto",
+				Symbol:      "canto",
+				Description: "EVM, staking and governance denom of canto",
 				DenomUnits: []*banktypes.DenomUnit{
 					{
 						Denom:    "aevmos",
@@ -89,9 +89,9 @@ func TestEqualMetadata(t *testing.T) {
 			banktypes.Metadata{
 				Base:        "acanto",
 				Display:     "canto",
-				Name:        "Canto",
-				Symbol:      "CANTO",
-				Description: "EVM, staking and governance denom of Canto",
+				Name:        "canto",
+				Symbol:      "canto",
+				Description: "EVM, staking and governance denom of canto",
 				DenomUnits: []*banktypes.DenomUnit{
 					{
 						Denom:    "acanto",
@@ -107,9 +107,9 @@ func TestEqualMetadata(t *testing.T) {
 			banktypes.Metadata{
 				Base:        "acanto",
 				Display:     "canto",
-				Name:        "Canto",
-				Symbol:      "CANTO",
-				Description: "EVM, staking and governance denom of Canto",
+				Name:        "canto",
+				Symbol:      "canto",
+				Description: "EVM, staking and governance denom of canto",
 				DenomUnits: []*banktypes.DenomUnit{
 					{
 						Denom:    "acanto",
@@ -125,9 +125,9 @@ func TestEqualMetadata(t *testing.T) {
 			banktypes.Metadata{
 				Base:        "acanto",
 				Display:     "canto",
-				Name:        "Canto",
-				Symbol:      "CANTO",
-				Description: "EVM, staking and governance denom of Canto",
+				Name:        "canto",
+				Symbol:      "canto",
+				Description: "EVM, staking and governance denom of canto",
 				DenomUnits: []*banktypes.DenomUnit{
 					{
 						Denom:    "acanto",
@@ -148,9 +148,9 @@ func TestEqualMetadata(t *testing.T) {
 			banktypes.Metadata{
 				Base:        "acanto",
 				Display:     "canto",
-				Name:        "Canto",
-				Symbol:      "CANTO",
-				Description: "EVM, staking and governance denom of Canto",
+				Name:        "canto",
+				Symbol:      "canto",
+				Description: "EVM, staking and governance denom of canto",
 				DenomUnits: []*banktypes.DenomUnit{
 					{
 						Denom:    "acanto",

@@ -3,13 +3,13 @@ package keeper_test
 import (
 	"math/big"
 
-	"github.com/Canto-Network/canto/v4/app"
-	"github.com/Canto-Network/canto/v4/testutil"
-	"github.com/Canto-Network/canto/v4/x/erc20/types"
 	"github.com/cosmos/cosmos-sdk/client/tx"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	"github.com/cosmos/cosmos-sdk/types/tx/signing"
 	"github.com/ethereum/go-ethereum/common"
+	"github.com/manifest-Network/manifest/v4/app"
+	"github.com/manifest-Network/manifest/v4/testutil"
+	"github.com/manifest-Network/manifest/v4/x/erc20/types"
 	. "github.com/onsi/ginkgo/v2"
 	. "github.com/onsi/gomega"
 	"github.com/tharsis/ethermint/crypto/ethsecp256k1"

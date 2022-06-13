@@ -5,8 +5,8 @@ import (
 
 	sdk "github.com/cosmos/cosmos-sdk/types"
 
-	"github.com/tharsis/ethermint/tests"
 	"github.com/Canto-Network/canto/v4/x/incentives/types"
+	"github.com/tharsis/ethermint/tests"
 )
 
 func (suite KeeperTestSuite) TestRegisterIncentive() {

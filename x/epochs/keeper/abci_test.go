@@ -4,8 +4,8 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/Canto-Network/canto/v4/x/epochs"
-	"github.com/Canto-Network/canto/v4/x/epochs/types"
+	"github.com/manifest-Network/manifest/v4/x/epochs"
+	"github.com/manifest-Network/manifest/v4/x/epochs/types"
 )
 
 func (suite *KeeperTestSuite) TestEpochInfoChangesBeginBlockerAndInitGenesis() {

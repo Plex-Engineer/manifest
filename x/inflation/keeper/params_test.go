@@ -1,7 +1,7 @@
 package keeper_test
 
 import (
-	"github.com/Canto-Network/canto/v4/x/inflation/types"
+	"github.com/manifest-Network/manifest/v4/x/inflation/types"
 )
 
 func (suite *KeeperTestSuite) TestParams() {

@@ -149,7 +149,7 @@ The proposal details must be supplied via a JSON file.`,
 Where metadata.json contains (example):
 
 {
-  "description": "staking, gas and governance token of the Canto testnets"
+  "description": "staking, gas and governance token of the canto testnets"
   "denom_units": [
 		{
 			"denom": "acanto",
@@ -163,8 +163,8 @@ Where metadata.json contains (example):
 	],
 	"base": "acanto",
 	"display: "canto",
-	"name": "Canto",
-	"symbol": "CANTO"
+	"name": "canto",
+	"symbol": "canto"
 }`, version.AppName,
 		),
 		RunE: func(cmd *cobra.Command, args []string) error {

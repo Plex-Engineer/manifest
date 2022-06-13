@@ -3,6 +3,7 @@ package cli
 import (
 	"fmt"
 	"time"
+
 	"github.com/spf13/cobra"
 
 	"github.com/cosmos/cosmos-sdk/client"
@@ -13,7 +14,7 @@ import (
 	govtypes "github.com/cosmos/cosmos-sdk/x/gov/types"
 
 	sdkerrors "github.com/cosmos/cosmos-sdk/types/errors"
-	
+
 	"github.com/Canto-Network/canto/v4/x/unigov/types"
 )
 
@@ -46,7 +47,7 @@ func NewLendingMarketProposalCmd() *cobra.Command {
 		Use:   "lending-market [metadata]",
 		Args:  cobra.ExactArgs(1),
 		Short: "Submit a lending market proposal",
-		Long: `Submit a proposal for the Canto Lending Market along with an initial deposit.
+		Long: `Submit a proposal for the canto Lending Market along with an initial deposit.
 Upon passing, the
 The proposal details must be supplied via a JSON file.`,
 		Example: fmt.Sprintf(`$ %s tx gov submit-proposal lending-market <path/to/metadata.json> --from=<key_or_address> --title=<title> --description=<description>
@@ -96,8 +97,6 @@ Where metadata.json contains (example):
 
 			content := types.NewLendingMarketProposal(title, description, &propMetaData)
 
-			
-			
 			msg, err := govtypes.NewMsgSubmitProposal(content, deposit, from)
 			if err != nil {
 				return err
@@ -126,14 +125,13 @@ Where metadata.json contains (example):
 	return cmd
 }
 
-
 //Register TreasuryProposal submit cmd
 func NewTreasuryProposalCmd() *cobra.Command {
 	cmd := &cobra.Command{
 		Use:   "treasury-proposal [metadata]",
 		Args:  cobra.ExactArgs(1),
-		Short: "Submit a proposal to the Canto Treasury",
-		Long: `Submit a proposal for the Canto Treasury along with an initial deposit.
+		Short: "Submit a proposal to the canto Treasury",
+		Long: `Submit a proposal for the canto Treasury along with an initial deposit.
 Upon passing, the
 The proposal details must be supplied via a JSON file.`,
 		Example: fmt.Sprintf(`$ %s tx gov submit-proposal treasury-proposal <path/to/metadata.json> --from=<key_or_address> --title=<title> --description=<description>
@@ -182,8 +180,6 @@ Where metadata.json contains (example):
 
 			content := types.NewTreasuryProposal(title, description, &propMetaData)
 
-			
-			
 			msg, err := govtypes.NewMsgSubmitProposal(content, deposit, from)
 			if err != nil {
 				return err

@@ -37,7 +37,7 @@ module.exports = {
     // ['link', { rel: "apple-touch-icon", sizes: "180x180", href: "/apple-touch-icon.png" }],
     ['link', { rel: "icon", type: "image/png", sizes: "32x32", href: "/favicon32.png" }],
     ['link', { rel: "icon", type: "image/png", sizes: "16x16", href: "/favicon16.png" }],
-    ['link', { rel: "manifest", href: "/site.webmanifest" }],
+    ['link', { rel: "canto", href: "/site.webcanto" }],
     ['meta', { name: "msapplication-TileColor", content: "#2e3148" }],
     ['meta', { name: "theme-color", content: "#ffffff" }],
     ['link', { rel: "icon", type: "image/svg+xml", href: "/favicon.svg" }],

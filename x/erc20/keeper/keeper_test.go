@@ -46,16 +46,16 @@ import (
 	evmtypes "github.com/tharsis/ethermint/x/evm/types"
 	feemarkettypes "github.com/tharsis/ethermint/x/feemarket/types"
 
-	"github.com/Canto-Network/canto/v4/app"
-	"github.com/Canto-Network/canto/v4/contracts"
-	"github.com/Canto-Network/canto/v4/x/erc20/types"
+	"github.com/manifest-Network/manifest/v4/app"
+	"github.com/manifest-Network/manifest/v4/contracts"
+	"github.com/manifest-Network/manifest/v4/x/erc20/types"
 )
 
 type KeeperTestSuite struct {
 	suite.Suite
 
 	ctx              sdk.Context
-	app              *app.Canto
+	app              *app.manifest
 	queryClientEvm   evm.QueryClient
 	queryClient      types.QueryClient
 	address          common.Address

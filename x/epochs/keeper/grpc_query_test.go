@@ -6,7 +6,7 @@ import (
 
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	"github.com/cosmos/cosmos-sdk/types/query"
-	"github.com/Canto-Network/canto/v4/x/epochs/types"
+	"github.com/manifest-Network/manifest/v4/x/epochs/types"
 )
 
 func (suite *KeeperTestSuite) TestEpochInfo() {

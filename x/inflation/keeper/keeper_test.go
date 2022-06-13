@@ -19,9 +19,9 @@ import (
 
 	evm "github.com/tharsis/ethermint/x/evm/types"
 
-	"github.com/Canto-Network/canto/v4/app"
-	epochstypes "github.com/Canto-Network/canto/v4/x/epochs/types"
-	"github.com/Canto-Network/canto/v4/x/inflation/types"
+	"github.com/manifest-Network/manifest/v4/app"
+	epochstypes "github.com/manifest-Network/manifest/v4/x/epochs/types"
+	"github.com/manifest-Network/manifest/v4/x/inflation/types"
 )
 
 var denomMint = types.DefaultInflationDenom
@@ -30,7 +30,7 @@ type KeeperTestSuite struct {
 	suite.Suite
 
 	ctx            sdk.Context
-	app            *app.Canto
+	app            *app.manifest
 	queryClientEvm evm.QueryClient
 	queryClient    types.QueryClient
 	consAddress    sdk.ConsAddress
@@ -61,7 +61,7 @@ func (suite *KeeperTestSuite) DoSetupTest(t require.TestingT) {
 	// setup context
 	suite.ctx = suite.app.BaseApp.NewContext(checkTx, tmproto.Header{
 		Height:          1,
-		ChainID:         "canto_9001-1",
+		ChainID:         "manifest_9001-1",
 		Time:            time.Now().UTC(),
 		ProposerAddress: suite.consAddress.Bytes(),
 

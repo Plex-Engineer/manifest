@@ -26,7 +26,7 @@ cantod keys add $KEY --keyring-backend $KEYRING --algo $KEYALGO
 cantod keys add $KEY2 --keyring-backend $KEYRING --algo $KEYALGO
 cantod keys add $KEY3 --keyring-backend $KEYRING --algo $KEYALGO
 
-# Set moniker and chain-id for Canto (Moniker can be anything, chain-id must be an integer)
+# Set moniker and chain-id for canto (Moniker can be anything, chain-id must be an integer)
 cantod init $MONIKER --chain-id $CHAINID
 
 # Change parameter token denominations to acanto

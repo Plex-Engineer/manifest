@@ -7,7 +7,7 @@ import (
 // RootCodespace is the codespace for all errors defined in this package
 const RootCodespace = "canto"
 
-// root error codes for Canto
+// root error codes for canto
 const (
 	codeKeyTypeNotSupported = iota + 2
 )

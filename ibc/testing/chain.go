@@ -23,7 +23,7 @@ import (
 	evmtypes "github.com/tharsis/ethermint/x/evm/types"
 )
 
-// ChainIDPrefix defines the default chain ID prefix for Canto test chains
+// ChainIDPrefix defines the default chain ID prefix for canto test chains
 var ChainIDPrefix = "canto_9000-"
 
 func init() {

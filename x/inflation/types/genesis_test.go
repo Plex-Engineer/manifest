@@ -3,8 +3,8 @@ package types
 import (
 	"testing"
 
+	epochstypes "github.com/manifest-Network/manifest/v4/x/epochs/types"
 	"github.com/stretchr/testify/suite"
-	epochstypes "github.com/Canto-Network/canto/v4/x/epochs/types"
 )
 
 type GenesisTestSuite struct {

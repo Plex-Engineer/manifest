@@ -19,15 +19,15 @@ import (
 	"github.com/tharsis/ethermint/crypto/ethsecp256k1"
 	feemarkettypes "github.com/tharsis/ethermint/x/feemarket/types"
 
-	"github.com/Canto-Network/canto/v4/app"
-	v4 "github.com/Canto-Network/canto/v4/app/upgrades/v4"
+	"github.com/manifest-Network/manifest/v4/app"
+	v4 "github.com/manifest-Network/manifest/v4/app/upgrades/v4"
 )
 
 type UpgradeTestSuite struct {
 	suite.Suite
 
 	ctx                    sdk.Context
-	app                    *app.Canto
+	app                    *app.manifest
 	consAddress            sdk.ConsAddress
 	expiredOsmoClient      *tmclient.ClientState
 	activeOsmoClient       *tmclient.ClientState

@@ -1,9 +1,10 @@
 package cli
 
 import (
+	"encoding/json"
 	"io/ioutil"
 	"path/filepath"
-	"encoding/json"
+
 	"github.com/Canto-Network/canto/v4/x/unigov/types"
 	"github.com/cosmos/cosmos-sdk/codec"
 )
@@ -24,11 +25,11 @@ func ParseLendingMarketMetadata(cdc codec.JSONCodec, metadataFile string) (types
 	// }
 
 	if err = json.Unmarshal(contents, &propMetaData); err != nil {
-		return types.LendingMarketMetadata{}, err 
+		return types.LendingMarketMetadata{}, err
 	}
 
 	propMetaData.PropId = 0
-	
+
 	return propMetaData, nil
 }
 
@@ -45,10 +46,10 @@ func ParseTreasuryMetadata(cdc codec.JSONCodec, metadataFile string) (types.Trea
 	// }
 
 	if err = json.Unmarshal(contents, &propMetaData); err != nil {
-		return types.TreasuryProposalMetadata{}, err 
+		return types.TreasuryProposalMetadata{}, err
 	}
 
 	propMetaData.PropID = 0
-	
+
 	return propMetaData, nil
 }

@@ -157,9 +157,9 @@ func init() {
 const (
 	// Name defines the application binary name
 	Name = "cantod"
-	// MainnetChainID defines the Canto EIP155 chain ID for mainnet
+	// MainnetChainID defines the canto EIP155 chain ID for mainnet
 	MainnetChainID = "canto_9001"
-	// TestnetChainID defines the Canto EIP155 chain ID for testnet
+	// TestnetChainID defines the canto EIP155 chain ID for testnet
 	TestnetChainID = "canto_9000"
 )
 
@@ -180,7 +180,7 @@ var (
 		gov.NewAppModuleBasic(
 			paramsclient.ProposalHandler, distrclient.ProposalHandler, upgradeclient.ProposalHandler, upgradeclient.CancelProposalHandler,
 			ibcclientclient.UpdateClientProposalHandler, ibcclientclient.UpgradeProposalHandler,
-			// Canto proposal types
+			// canto proposal types
 			erc20client.RegisterCoinProposalHandler, erc20client.RegisterERC20ProposalHandler,
 			erc20client.ToggleTokenConversionProposalHandler,
 			incentivesclient.RegisterIncentiveProposalHandler, incentivesclient.CancelIncentiveProposalHandler, unigovclient.LendingMarketProposalHandler, unigovclient.TreasuryProposalHandler, // <----- uni gov proposal handler
@@ -229,15 +229,15 @@ var (
 )
 
 var (
-	_ servertypes.Application = (*Canto)(nil)
-	_ simapp.App              = (*Canto)(nil)
-	_ ibctesting.TestingApp   = (*Canto)(nil)
+	_ servertypes.Application = (*canto)(nil)
+	_ simapp.App              = (*canto)(nil)
+	_ ibctesting.TestingApp   = (*canto)(nil)
 )
 
-// Canto implements an extended ABCI application. It is an application
+// canto implements an extended ABCI application. It is an application
 // that may process transactions through Ethereum's EVM running atop of
 // Tendermint consensus.
-type Canto struct {
+type canto struct {
 	*baseapp.BaseApp
 
 	// encoding
@@ -277,7 +277,7 @@ type Canto struct {
 	EvmKeeper       *evmkeeper.Keeper
 	FeeMarketKeeper feemarketkeeper.Keeper
 
-	// Canto keepers
+	// canto keepers
 	InflationKeeper  inflationkeeper.Keeper
 	Erc20Keeper      erc20keeper.Keeper
 	UnigovKeeper     unigovkeeper.Keeper // <------- unigov keeper
@@ -302,8 +302,8 @@ type Canto struct {
 	// mca common.Address
 }
 
-// NewCanto returns a reference to a new initialized Ethermint application.
-func NewCanto(
+// Newcanto returns a reference to a new initialized Ethermint application.
+func Newcanto(
 	logger log.Logger,
 	db dbm.DB,
 	traceStore io.Writer,
@@ -314,7 +314,7 @@ func NewCanto(
 	encodingConfig simappparams.EncodingConfig,
 	appOpts servertypes.AppOptions,
 	baseAppOptions ...func(*baseapp.BaseApp),
-) *Canto {
+) *canto {
 	appCodec := encodingConfig.Marshaler
 	cdc := encodingConfig.Amino
 	interfaceRegistry := encodingConfig.InterfaceRegistry
@@ -351,7 +351,7 @@ func NewCanto(
 	tkeys := sdk.NewTransientStoreKeys(paramstypes.TStoreKey, evmtypes.TransientKey)
 	memKeys := sdk.NewMemoryStoreKeys(capabilitytypes.MemStoreKey)
 
-	app := &Canto{
+	app := &canto{
 		BaseApp:           bApp,
 		cdc:               cdc,
 		appCodec:          appCodec,
@@ -437,7 +437,7 @@ func NewCanto(
 		app.AccountKeeper, app.BankKeeper, &stakingKeeper, govRouter,
 	)
 
-	// Canto Keeper
+	// canto Keeper
 	app.InflationKeeper = inflationkeeper.NewKeeper(
 		keys[inflationtypes.StoreKey], appCodec, app.GetSubspace(inflationtypes.ModuleName),
 		app.AccountKeeper, app.BankKeeper, app.DistrKeeper, &stakingKeeper,
@@ -588,7 +588,7 @@ func NewCanto(
 		// Ethermint app modules
 		evm.NewAppModule(app.EvmKeeper, app.AccountKeeper),
 		feemarket.NewAppModule(app.FeeMarketKeeper),
-		// Canto app modules
+		// canto app modules
 		inflation.NewAppModule(app.InflationKeeper, app.AccountKeeper, app.StakingKeeper),
 		erc20.NewAppModule(app.Erc20Keeper, app.AccountKeeper), // <--------- erc 20 new app module
 		unigov.NewAppModule(app.UnigovKeeper, app.AccountKeeper),
@@ -659,7 +659,7 @@ func NewCanto(
 		feegrant.ModuleName,
 		paramstypes.ModuleName,
 		upgradetypes.ModuleName,
-		// Canto modules
+		// canto modules
 		vestingtypes.ModuleName,
 		inflationtypes.ModuleName,
 		erc20types.ModuleName,
@@ -694,7 +694,7 @@ func NewCanto(
 		upgradetypes.ModuleName,
 		// Ethermint modules
 		evmtypes.ModuleName, feemarkettypes.ModuleName,
-		// Canto modules
+		// canto modules
 		vestingtypes.ModuleName,
 		inflationtypes.ModuleName,
 		erc20types.ModuleName,
@@ -794,21 +794,21 @@ func NewCanto(
 }
 
 // Name returns the name of the App
-func (app *Canto) Name() string { return app.BaseApp.Name() }
+func (app *canto) Name() string { return app.BaseApp.Name() }
 
 // BeginBlocker updates every begin block
-func (app *Canto) BeginBlocker(ctx sdk.Context, req abci.RequestBeginBlock) abci.ResponseBeginBlock {
+func (app *canto) BeginBlocker(ctx sdk.Context, req abci.RequestBeginBlock) abci.ResponseBeginBlock {
 	BeginBlockForks(ctx, app)
 	return app.mm.BeginBlock(ctx, req)
 }
 
 // EndBlocker updates every end block
-func (app *Canto) EndBlocker(ctx sdk.Context, req abci.RequestEndBlock) abci.ResponseEndBlock {
+func (app *canto) EndBlocker(ctx sdk.Context, req abci.RequestEndBlock) abci.ResponseEndBlock {
 	return app.mm.EndBlock(ctx, req)
 }
 
 // We are intentionally decomposing the DeliverTx method so as to calculate the transactions per second.
-func (app *Canto) DeliverTx(req abci.RequestDeliverTx) (res abci.ResponseDeliverTx) {
+func (app *canto) DeliverTx(req abci.RequestDeliverTx) (res abci.ResponseDeliverTx) {
 	defer func() {
 		// TODO: Record the count along with the code and or reason so as to display
 		// in the transactions per second live dashboards.
@@ -823,7 +823,7 @@ func (app *Canto) DeliverTx(req abci.RequestDeliverTx) (res abci.ResponseDeliver
 }
 
 // InitChainer updates at chain initialization
-func (app *Canto) InitChainer(ctx sdk.Context, req abci.RequestInitChain) abci.ResponseInitChain {
+func (app *canto) InitChainer(ctx sdk.Context, req abci.RequestInitChain) abci.ResponseInitChain {
 	var genesisState simapp.GenesisState
 	if err := json.Unmarshal(req.AppStateBytes, &genesisState); err != nil {
 		panic(err)
@@ -835,12 +835,12 @@ func (app *Canto) InitChainer(ctx sdk.Context, req abci.RequestInitChain) abci.R
 }
 
 // LoadHeight loads state at a particular height
-func (app *Canto) LoadHeight(height int64) error {
+func (app *canto) LoadHeight(height int64) error {
 	return app.LoadVersion(height)
 }
 
 // ModuleAccountAddrs returns all the app's module account addresses.
-func (app *Canto) ModuleAccountAddrs() map[string]bool {
+func (app *canto) ModuleAccountAddrs() map[string]bool {
 	modAccAddrs := make(map[string]bool)
 	for acc := range maccPerms {
 		modAccAddrs[authtypes.NewModuleAddress(acc).String()] = true
@@ -851,7 +851,7 @@ func (app *Canto) ModuleAccountAddrs() map[string]bool {
 
 // BlockedAddrs returns all the app's module account addresses that are not
 // allowed to receive external tokens.
-func (app *Canto) BlockedAddrs() map[string]bool {
+func (app *canto) BlockedAddrs() map[string]bool {
 	blockedAddrs := make(map[string]bool)
 	for acc := range maccPerms {
 		blockedAddrs[authtypes.NewModuleAddress(acc).String()] = !allowedReceivingModAcc[acc]
@@ -860,64 +860,64 @@ func (app *Canto) BlockedAddrs() map[string]bool {
 	return blockedAddrs
 }
 
-// LegacyAmino returns Canto's amino codec.
+// LegacyAmino returns canto's amino codec.
 //
 // NOTE: This is solely to be used for testing purposes as it may be desirable
 // for modules to register their own custom testing types.
-func (app *Canto) LegacyAmino() *codec.LegacyAmino {
+func (app *canto) LegacyAmino() *codec.LegacyAmino {
 	return app.cdc
 }
 
-// AppCodec returns Canto's app codec.
+// AppCodec returns canto's app codec.
 //
 // NOTE: This is solely to be used for testing purposes as it may be desirable
 // for modules to register their own custom testing types.
-func (app *Canto) AppCodec() codec.Codec {
+func (app *canto) AppCodec() codec.Codec {
 	return app.appCodec
 }
 
-// InterfaceRegistry returns Canto's InterfaceRegistry
-func (app *Canto) InterfaceRegistry() types.InterfaceRegistry {
+// InterfaceRegistry returns canto's InterfaceRegistry
+func (app *canto) InterfaceRegistry() types.InterfaceRegistry {
 	return app.interfaceRegistry
 }
 
 // GetKey returns the KVStoreKey for the provided store key.
 //
 // NOTE: This is solely to be used for testing purposes.
-func (app *Canto) GetKey(storeKey string) *sdk.KVStoreKey {
+func (app *canto) GetKey(storeKey string) *sdk.KVStoreKey {
 	return app.keys[storeKey]
 }
 
 // GetTKey returns the TransientStoreKey for the provided store key.
 //
 // NOTE: This is solely to be used for testing purposes.
-func (app *Canto) GetTKey(storeKey string) *sdk.TransientStoreKey {
+func (app *canto) GetTKey(storeKey string) *sdk.TransientStoreKey {
 	return app.tkeys[storeKey]
 }
 
 // GetMemKey returns the MemStoreKey for the provided mem key.
 //
 // NOTE: This is solely used for testing purposes.
-func (app *Canto) GetMemKey(storeKey string) *sdk.MemoryStoreKey {
+func (app *canto) GetMemKey(storeKey string) *sdk.MemoryStoreKey {
 	return app.memKeys[storeKey]
 }
 
 // GetSubspace returns a param subspace for a given module name.
 //
 // NOTE: This is solely to be used for testing purposes.
-func (app *Canto) GetSubspace(moduleName string) paramstypes.Subspace {
+func (app *canto) GetSubspace(moduleName string) paramstypes.Subspace {
 	subspace, _ := app.ParamsKeeper.GetSubspace(moduleName)
 	return subspace
 }
 
 // SimulationManager implements the SimulationApp interface
-func (app *Canto) SimulationManager() *module.SimulationManager {
+func (app *canto) SimulationManager() *module.SimulationManager {
 	return app.sm
 }
 
 // RegisterAPIRoutes registers all application module routes with the provided
 // API server.
-func (app *Canto) RegisterAPIRoutes(apiSvr *api.Server, apiConfig config.APIConfig) {
+func (app *canto) RegisterAPIRoutes(apiSvr *api.Server, apiConfig config.APIConfig) {
 	clientCtx := apiSvr.ClientCtx
 	rpc.RegisterRoutes(clientCtx, apiSvr.Router)
 
@@ -938,38 +938,38 @@ func (app *Canto) RegisterAPIRoutes(apiSvr *api.Server, apiConfig config.APIConf
 	}
 }
 
-func (app *Canto) RegisterTxService(clientCtx client.Context) {
+func (app *canto) RegisterTxService(clientCtx client.Context) {
 	authtx.RegisterTxService(app.BaseApp.GRPCQueryRouter(), clientCtx, app.BaseApp.Simulate, app.interfaceRegistry)
 }
 
-func (app *Canto) RegisterTendermintService(clientCtx client.Context) {
+func (app *canto) RegisterTendermintService(clientCtx client.Context) {
 	tmservice.RegisterTendermintService(app.BaseApp.GRPCQueryRouter(), clientCtx, app.interfaceRegistry)
 }
 
 // IBC Go TestingApp functions
 
 // GetBaseApp implements the TestingApp interface.
-func (app *Canto) GetBaseApp() *baseapp.BaseApp {
+func (app *canto) GetBaseApp() *baseapp.BaseApp {
 	return app.BaseApp
 }
 
 // GetStakingKeeper implements the TestingApp interface.
-func (app *Canto) GetStakingKeeper() stakingkeeper.Keeper {
+func (app *canto) GetStakingKeeper() stakingkeeper.Keeper {
 	return app.StakingKeeper
 }
 
 // GetIBCKeeper implements the TestingApp interface.
-func (app *Canto) GetIBCKeeper() *ibckeeper.Keeper {
+func (app *canto) GetIBCKeeper() *ibckeeper.Keeper {
 	return app.IBCKeeper
 }
 
 // GetScopedIBCKeeper implements the TestingApp interface.
-func (app *Canto) GetScopedIBCKeeper() capabilitykeeper.ScopedKeeper {
+func (app *canto) GetScopedIBCKeeper() capabilitykeeper.ScopedKeeper {
 	return app.ScopedIBCKeeper
 }
 
 // GetTxConfig implements the TestingApp interface.
-func (app *Canto) GetTxConfig() client.TxConfig {
+func (app *canto) GetTxConfig() client.TxConfig {
 	cfg := encoding.MakeConfig(ModuleBasics)
 	return cfg.TxConfig
 }
@@ -1024,7 +1024,7 @@ func initParamsKeeper(
 	return paramsKeeper
 }
 
-func (app *Canto) setupUpgradeHandlers() {
+func (app *canto) setupUpgradeHandlers() {
 	// v2 upgrade handler
 	app.UpgradeKeeper.SetUpgradeHandler(
 		v2.UpgradeName,

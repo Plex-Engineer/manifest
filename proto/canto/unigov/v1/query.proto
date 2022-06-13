@@ -14,7 +14,7 @@ option go_package = "github.com/Canto-Network/canto/v3/x/unigov/types";
 service Query {
   // Parameters queries the parameters of the module.
   rpc Params(QueryParamsRequest) returns (QueryParamsResponse) {
-    option (google.api.http).get = "/CantoNetwork/canto/unigov/params";
+    option (google.api.http).get = "/cantoNetwork/canto/unigov/params";
   }
   // this line is used by starport scaffolding # 2
 }

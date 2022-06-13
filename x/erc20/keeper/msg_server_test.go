@@ -665,7 +665,6 @@ func (suite *KeeperTestSuite) TestConvertERC20NativeERC20() {
 			suite.Commit()
 			ctx := sdk.WrapSDKContext(suite.ctx)
 
-
 			tc.extra()
 
 			res, err := suite.app.Erc20Keeper.ConvertERC20(ctx, msg)
@@ -964,7 +963,6 @@ func (suite *KeeperTestSuite) TestWrongPairOwnerERC20NativeCoin() {
 		})
 	}
 }
-
 
 func (suite *KeeperTestSuite) TestConvertCoinNativeIBCVoucher() {
 	testCases := []struct {

@@ -5,8 +5,8 @@ import (
 
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	authtypes "github.com/cosmos/cosmos-sdk/x/auth/types"
-	incentivestypes "github.com/Canto-Network/canto/v4/x/incentives/types"
-	"github.com/Canto-Network/canto/v4/x/inflation/types"
+	incentivestypes "github.com/manifest-Network/manifest/v4/x/incentives/types"
+	"github.com/manifest-Network/manifest/v4/x/inflation/types"
 )
 
 func (suite *KeeperTestSuite) TestMintAndAllocateInflation() {
@@ -123,7 +123,7 @@ func (suite *KeeperTestSuite) TestGetCirculatingSupplyAndInflationRate() {
 			suite.SetupTest() // reset
 
 			// Team allocation is only set on mainnet
-			suite.ctx = suite.ctx.WithChainID("canto_9001-1")
+			suite.ctx = suite.ctx.WithChainID("manifest_9001-1")
 			tc.malleate()
 
 			// Mint coins to increase supply
