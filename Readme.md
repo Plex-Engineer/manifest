@@ -2,9 +2,9 @@
 parent:
   order: false
 -->
-# canto
+# Manifest
 ## Description
-- canto is a Layer 1 blockchain built using Cosmos SDK and Tendermint Consensus with an EVM execution layer ([Ethermint](https://github.com/tharsis/ethermint) Module) and network owned/incentivized defi primitives(stablecoin, dex, lending market).
+- Manifest is a Layer 1 blockchain built using Cosmos SDK and Tendermint Consensus with an EVM execution layer ([Ethermint](https://github.com/tharsis/ethermint) Module) and network owned/incentivized defi primitives(stablecoin, dex, lending market).
 - canto's blockchain infrastructure is forked from [Evmos](https://github.com/tharsis/evmos) (Standard Cosmos SDK modules + Ethermint Module + ERC20 Module). 
 - canto includes a new additional functionality in the form of a novel cross-runtime governance mechanism via the unigov (unified governance) module. The unigov module allows canto Network stakeholders to vote on proposals which are read and executed by smart contracts deployed on the EVM.
 
